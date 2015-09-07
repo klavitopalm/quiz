@@ -9,7 +9,7 @@ var db;
 mongoClient.connect(url, function(err, db) {
 	assert.equal(null, err);
 	console.log("connected to db server");
-	
+
 	db.close();
 });
 
@@ -34,24 +34,25 @@ console.log('Example app listening at http://localhost:%s', port);
 io.sockets.on('connection', function(socket) {
 
     setTimeout(function() {
-        socket.emit('hello', 'Sonja');
+        socket.emit('setNewQuestion', {questionId: 'id1', questionNumber: 1, questionText: 'Which hero has hook shot?', answer1: 'Spirit Breaker', answer2: 'Clockwerk', answer3: 'Gyrocopter', answer4: 'Storm Spirit'});
+				console.log('first question send...');
     }, 3000);
 
-    socket.on('ready', function() {
-		console.log('ready empfangen');
-        socket.broadcast.emit('ready');
+    socket.on('questionAnswered', function(payload) {
+		console.log('questionId:' + payload.questionId + 'answer: '+ payload.givenAnswer);
+        //socket.broadcast.emit('ready');
     });
 
-	
+
 	socket.on('name', function(payload) {
 		var fingerprint = payload.fingerprint;
 		var name = payload.name;
-		
+
 		mongoClient.connect(url, function(err, db) {
 			assert.equal(null, err);
 			var collection = db.collection('identification');
 			console.log('fingerprint: ' + fingerprint +', name: '+ name);
-			
+
 			collection.insert({fingerprint: fingerprint, name: name}, function (err, result)
 			{
 			console.log('testoutput 2');
@@ -65,8 +66,8 @@ io.sockets.on('connection', function(socket) {
 				}
 				db.close();
 			});
-			
-			
+
+
 		});
 	});
 });
