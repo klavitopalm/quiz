@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html ng-app="App">
+<head>
+    <meta charset="UTF-8">
+    <title>KillerApp</title>
+</head>
+<body>
+
+  <div ng-view></div>
+
+	<!--
+	-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-route.min.js"></script>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io.connect();
+	</script>
+
+  <script src="app.js"></script>
+  <script src="routing.js"></script>
+	<script src="services.js"></script>
+	<script src="js/libs/fingerprint.js"></script>
+
+  <script src="prototyping/prototypingController.js"></script>
+  <script src="quiz/quizController.js"></script>
+
+</body>
+</html>

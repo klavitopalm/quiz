@@ -1,0 +1,17 @@
+<div ng-show="connecting">
+    <i>connecting...</i>
+</div>
+
+<div ng-show="!connecting">
+    <h1>Hallo {{name}}</h1>
+    <p>
+        Are you ready?
+        <button ng-click="setReady()">YES!</button>
+
+		Send identification
+        <button ng-click="identify()">identify!</button>
+    </p>
+    <ul>
+        <li ng-repeat="ready in readys">{{ready}}</li>
+    </ul>
+</div>
