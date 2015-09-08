@@ -4,6 +4,8 @@ angular.module('App').controller('quiz', function($scope, Socket) {
   var questionId = -1;
   $scope.questionText = "Waiting for first question...";
 
+var answersList = [];
+
   $scope.answer1 = "waiting...";
   $scope.answer2 = "waiting...";
   $scope.answer3 = "waiting...";
@@ -13,12 +15,17 @@ angular.module('App').controller('quiz', function($scope, Socket) {
   Socket.on('setNewQuestion', function(payload) {
     questionId = payload.questionId;
     $scope.questionText = payload.questionText;
-    $scope.answer1 = payload.answer1;
-    $scope.answer2 = payload.answer2;
-    $scope.answer3 = payload.answer3;
-    $scope.answer4 = payload.answer4;
+    answersList = payload.answers;
+    $scope.answer1 = payload.answers[0];
+    $scope.answer2 = payload.answers[1];
+    $scope.answer3 = payload.answers[2];
+    $scope.answer4 = payload.answers[3];
     $scope.questionNumber = payload.questionNumber;
   });
+
+  $scope.isVisible = function(answerButtonNumber) {
+    return answerButtonNumber <= answersList.length;
+  }
 
     $scope.answerOne = function() {
       Socket.emit('questionAnswered', {questionId: questionId, givenAnswer: 1});

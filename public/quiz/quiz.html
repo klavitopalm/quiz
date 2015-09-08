@@ -1,12 +1,12 @@
 <h1>Quiz</h1>
 
-<h3>{{questionNumber}}. {{questionText}}</h3>
+<h3>{{questionNumber}} {{questionText}}</h3>
 
 <div>
-  <button ng-click="answerOne()">{{answer1}}</button>
-  <button ng-click="answerTwo()">{{answer2}}</button>
-  <button ng-click="answerThree()">{{answer3}}</button>
-  <button ng-click="answerFour()">{{answer4}}</button>
+  <button ng-show="isVisible(1)" ng-click="answerOne()">{{answer1}}</button>
+  <button ng-show="isVisible(2)" ng-click="answerTwo()">{{answer2}}</button>
+  <button ng-show="isVisible(3)" ng-click="answerThree()">{{answer3}}</button>
+  <button ng-show="isVisible(4)" ng-click="answerFour()">{{answer4}}</button>
 </div>
 
 <div ng-show="isAnswered">

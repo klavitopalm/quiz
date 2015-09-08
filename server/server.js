@@ -34,13 +34,26 @@ console.log('Example app listening at http://localhost:%s', port);
 io.sockets.on('connection', function(socket) {
 
     setTimeout(function() {
-        socket.emit('setNewQuestion', {questionId: 'id1', questionNumber: 1, questionText: 'Which hero has hook shot?', answer1: 'Spirit Breaker', answer2: 'Clockwerk', answer3: 'Gyrocopter', answer4: 'Storm Spirit'});
-				console.log('first question send...');
-    }, 3000);
+        socket.emit('setNewQuestion', {questionId: 'id1', questionNumber: 1,
+				questionText: 'Which hero has hook shot?',
+				answers : ['Spirit Breaker', 'Clockwerk', 'Gyrocopter', 'Storm Spirit'
+			]});
+
+				console.log('first question sent...');
+    }, 2000);
 
     socket.on('questionAnswered', function(payload) {
-		console.log('questionId:' + payload.questionId + 'answer: '+ payload.givenAnswer);
+		console.log('questionId: ' + payload.questionId + ', answer: '+ payload.givenAnswer);
         //socket.broadcast.emit('ready');
+
+				socket.emit('setNewQuestion', {questionId: 'id2', questionNumber: 2,
+				questionText: 'Does Stengus know how to last hit?',
+				answers : ['No, biggest noob, eva!!!1', 'Know, yes. Does he want to? No!', 'Who the fuck is Stengus?'
+				]});
+
+				console.log('second question sent...');
+
+
     });
 
 
