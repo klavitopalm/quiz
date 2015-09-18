@@ -1,5 +1,5 @@
 //view controller
-angular.module('App').controller('quiz', function($scope, Socket) {
+angular.module('App').controller('quiz', ['$scope', 'Socket', function($scope, Socket) {
   $scope.isAnswered = false;
   var questionId = -1;
   $scope.questionText = "Waiting for first question...";
@@ -51,4 +51,4 @@ var answersList = [];
       $scope.isAnswered = true;
     };
 
-});
+}]);
